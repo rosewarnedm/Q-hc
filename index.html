@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q~hc | Quantitative Healthcare</title>
+  <meta name="description" content="Applying the rigour of quantitative science to the optimisation of healthcare systems.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://q-hc.co.uk/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://q-hc.co.uk/">
+  <meta property="og:title" content="Q~hc | Quantitative Healthcare">
+  <meta property="og:description" content="Applying the rigour of quantitative science to the optimisation of healthcare systems.">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Q~hc | Quantitative Healthcare">
+  <meta name="twitter:description" content="Applying the rigour of quantitative science to the optimisation of healthcare systems.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #0a0a0f;
+      --parchment: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-dim: rgba(201, 168, 76, 0.15);
+      --gold-mid: rgba(201, 168, 76, 0.4);
+      --white-dim: rgba(245, 240, 232, 0.06);
+      --white-mid: rgba(245, 240, 232, 0.5);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: var(--ink);
+      color: var(--parchment);
+      font-family: 'EB Garamond', Georgia, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Grid background */
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridDrift 40s linear infinite;
+    }
+
+    @keyframes gridDrift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Radial vignette */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center,
+        transparent 30%,
+        rgba(10,10,15,0.6) 70%,
+        rgba(10,10,15,0.95) 100%);
+      pointer-events: none;
+    }
+
+    /* Floating signal lines */
+    .signal {
+      position: fixed;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+      opacity: 0;
+      animation: signalPass 8s ease-in-out infinite;
+    }
+
+    .signal:nth-child(1) { top: 23%; width: 40%; left: -40%; animation-delay: 0s; }
+    .signal:nth-child(2) { top: 61%; width: 55%; left: -55%; animation-delay: 3.2s; }
+    .signal:nth-child(3) { top: 78%; width: 30%; left: -30%; animation-delay: 6.1s; }
+
+    @keyframes signalPass {
+      0% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(250vw); }
+    }
+
+    /* Main container */
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      max-width: 720px;
+      animation: fadeIn 2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo */
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.15em;
+      color: var(--parchment);
+      animation: fadeIn 2s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .logo .q {
+      color: var(--gold);
+      display: inline-block;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .logo .tilde {
+      color: var(--gold);
+      font-size: 0.85em;
+      display: inline-block;
+      animation: tildePulse 3s ease-in-out infinite;
+      margin: 0 0.02em;
+    }
+
+    .logo .hc {
+      opacity: 0.75;
+      font-size: 0.75em;
+      vertical-align: baseline;
+    }
+
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.3); }
+      50% { text-shadow: 0 0 40px rgba(201,168,76,0.7), 0 0 80px rgba(201,168,76,0.2); }
+    }
+
+    @keyframes tildePulse {
+      0%, 100% { opacity: 1; transform: scaleX(1); }
+      50% { opacity: 0.6; transform: scaleX(1.15); }
+    }
+
+    /* Thin rule */
+    .rule {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.8rem auto;
+      animation: fadeIn 2s ease 0.8s forwards;
+      opacity: 0;
+    }
+
+    /* Primary strapline */
+    .strapline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-style: italic;
+      color: var(--parchment);
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      margin-bottom: 0.6rem;
+      animation: fadeIn 2s ease 1s forwards;
+      opacity: 0;
+    }
+
+    /* Status line */
+    .status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.65rem, 1.5vw, 0.78rem);
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 1.6rem;
+      animation: fadeIn 2s ease 1.4s forwards;
+      opacity: 0;
+    }
+
+    .status::before {
+      content: '[ ';
+      opacity: 0.5;
+    }
+
+    .status::after {
+      content: ' ]';
+      opacity: 0.5;
+    }
+
+    /* Cursor blink */
+    .cursor {
+      display: inline-block;
+      width: 0.5em;
+      height: 1em;
+      background: var(--gold);
+      margin-left: 0.3em;
+      vertical-align: middle;
+      animation: blink 1.1s step-end infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0; }
+    }
+
+    /* Secondary note */
+    .note {
+      margin-top: 3rem;
+      font-size: clamp(0.75rem, 1.6vw, 0.88rem);
+      color: var(--white-mid);
+      letter-spacing: 0.06em;
+      font-style: italic;
+      animation: fadeIn 2s ease 1.8s forwards;
+      opacity: 0;
+    }
+
+    /* Corner marks */
+    .corner {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      opacity: 0.2;
+      animation: fadeIn 2s ease 2s forwards;
+    }
+
+    .corner--tl { top: 2rem; left: 2rem; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner--tr { top: 2rem; right: 2rem; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+    .corner--bl { bottom: 2rem; left: 2rem; border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner--br { bottom: 2rem; right: 2rem; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+    /* Equation watermark */
+    .equation {
+      position: fixed;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(201,168,76,0.45);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      animation: equationFade 3s ease 2.5s forwards;
+      opacity: 0;
+    }
+    @keyframes equationFade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid"></div>
+  <div class="vignette"></div>
+  <div class="signal"></div>
+  <div class="signal"></div>
+  <div class="signal"></div>
+
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--bl"></div>
+  <div class="corner corner--br"></div>
+
+  <div class="container">
+    <div class="logo">
+      <span class="q">Q</span><span class="tilde">~</span><span class="hc">hc</span>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="strapline">
+      Quantitative Healthcare
+    </div>
+
+    <div class="status">
+      in construction &mdash; await transformation<span class="cursor"></span>
+    </div>
+
+    <div class="note">
+      Applying the rigour of quantitative science<br>to the optimisation of healthcare systems
+    </div>
+  </div>
+
+  <div class="equation">
+    max &Sigma; Q(x) &nbsp;&middot;&nbsp; hc &sub; &real;&sup;n &nbsp;&middot;&nbsp; subject to: clinical constraints
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+Copy
+
+# Emacs
+*~
+\#*\#
+.\#*
+*.elc
+auto-save-list
+tramp
+.\#*
+ 
+# OS
+.DS_Store
+Thumbs.db
+ 
